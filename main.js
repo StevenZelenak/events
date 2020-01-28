@@ -103,12 +103,12 @@ const pies = [
         isAvailable: true,
         imageURL: "https://images-gmi-pmc.edge-generalmills.com/75593ed5-420b-4782-8eae-56bdfbc2586b.jpg",
         drinkPairing: "Berry Water",
-        instructor: "Steve",
+        instructor: "Steven",
 
     },
 ];
 
-const outputDom = (divID,str) => {
+const outputDom = (divID, str) => {
 
     const placement = document.getElementById(divID);
     placement.innerHTML = str;
@@ -130,14 +130,12 @@ const pieBuilder = (arr) => {
         domString += `<p>Price: $${value.price}</p>`;
         if (value.isOrganic) {
             domString += "<p>This pie is Organic</p>";
-        }
-        else{
+        } else {
             domString += "<p>This pie is not Organic</p>";
         }
         if (value.isWarm) {
             domString += "<p>This pie is warm</p>";
-        }
-        else{
+        } else {
             domString += "<p>This pie is cold</p>";
         }
         domString += `<p>The crust is ${value.crust}`;
@@ -152,4 +150,50 @@ const pieBuilder = (arr) => {
     outputDom("storePies", domString)
 };
 
-pieBuilder(pies);
+
+const zoesPies = (e) => {
+
+    const buttonId = e.target.id;
+    if(buttonId === 'All'){
+        pieBuilder(pies)
+    }
+    else{
+        
+        
+        const myPies = [];
+
+    
+    for (let value of pies) {
+        if (value.instructor === buttonId) {
+            myPies.push(value);
+            }
+
+        }
+
+        pieBuilder(myPies);
+    }
+
+    
+}
+
+
+const events = () =>{
+
+    document.getElementById('Zoe').addEventListener('click', zoesPies)
+    document.getElementById('Mary').addEventListener('click', zoesPies)
+    document.getElementById('Luke').addEventListener('click', zoesPies)
+    document.getElementById('Steven').addEventListener('click', zoesPies)
+    document.getElementById('All').addEventListener('click', zoesPies)
+
+};
+
+const init = () =>{
+
+    pieBuilder(pies);
+    events();
+    
+}
+
+
+init();
+
