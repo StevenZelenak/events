@@ -150,24 +150,50 @@ const pieBuilder = (arr) => {
     outputDom("storePies", domString)
 };
 
-pieBuilder(pies);
 
 const zoesPies = (e) => {
 
     const buttonId = e.target.id;
-    const myPies = [];
+    if(buttonId === 'All'){
+        pieBuilder(pies)
+    }
+    else{
+        
+        
+        const myPies = [];
 
+    
     for (let value of pies) {
         if (value.instructor === buttonId) {
             myPies.push(value);
+            }
+
         }
 
+        pieBuilder(myPies);
     }
 
-    pieBuilder(myPies);
+    
 }
 
-document.getElementById('Zoe').addEventListener('click', zoesPies)
-document.getElementById('Mary').addEventListener('click', zoesPies)
-document.getElementById('Luke').addEventListener('click', zoesPies)
-document.getElementById('Steven').addEventListener('click', zoesPies)
+
+const events = () =>{
+
+    document.getElementById('Zoe').addEventListener('click', zoesPies)
+    document.getElementById('Mary').addEventListener('click', zoesPies)
+    document.getElementById('Luke').addEventListener('click', zoesPies)
+    document.getElementById('Steven').addEventListener('click', zoesPies)
+    document.getElementById('All').addEventListener('click', zoesPies)
+
+};
+
+const init = () =>{
+
+    pieBuilder(pies);
+    events();
+    
+}
+
+
+init();
+
